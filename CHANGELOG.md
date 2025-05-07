@@ -2,8 +2,10 @@
 
 ## [Unreleased]
 
+## [1.2.2] - 2025-05-07 
+
 - Updated `LogcatFormatterExtended` to show clickable filename:linenumber links  
-- Maintenance release with updated dependencies
+- Updated dependencies
 
 ## [1.2.1] - 2023-09-22
 
