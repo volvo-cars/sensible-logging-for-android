@@ -1,0 +1,22 @@
+[versions]
+kotlin = "2.1.20"
+x_lifecycle = "2.8.7"
+x_appcompat = "1.7.0"
+android_library_plugin = "8.9.2"
+junit = "5.11.2"
+mockk = "1.13.3"
+compileSdk = "34"
+
+[libraries]
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk7", version.ref = "kotlin" }
+x-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "x_appcompat" }
+x-lifecycle-process = { group = "androidx.lifecycle", name = "lifecycle-process", version.ref = "x_lifecycle" }
+x-lifecycle-service = { group = "androidx.lifecycle", name = "lifecycle-service", version.ref = "x_lifecycle" }
+x-lifecycle-common-java8 = { group = "androidx.lifecycle", name = "lifecycle-common-java8", version.ref = "x_lifecycle" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+junit-bom = { group = "org.junit", name = "junit-bom", version.ref = "junit" }
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter" }
+
+[plugins]
+android-library = { id = "com.android.library", version.ref = "android_library_plugin" }
+maven-publish = { id = "com.vanniktech.maven.publish", version = "0.25.3" }
