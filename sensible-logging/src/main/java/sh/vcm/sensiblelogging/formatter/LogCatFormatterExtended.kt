@@ -23,7 +23,7 @@ object LogCatFormatterExtended : Formatter {
 
     private const val threadMaxLength = 16
     private const val categoriesMaxLength = 14
-    private const val fileAndFunctionMaxLength = 32
+    private const val fileAndFunctionMaxLength = 45
     private const val messageMaxLength = 64
 
     override fun format(line: Line, meta: Meta?): String {
@@ -40,7 +40,7 @@ object LogCatFormatterExtended : Formatter {
     private fun threadName(meta: Meta) = "[${meta.threadName.normalizeLength(characterCount = threadMaxLength, normalizationAlignment = NormalizationAlignment.Right)}]"
 
     private fun fileAndFunction(meta: Meta) =
-        "${meta.simpleClassName}${meta.functionName.asMethodOrFunction()}".normalizeLength(fileAndFunctionMaxLength)
+        "${meta.fileName}:${meta.lineNumber}${meta.functionName.asMethodOrFunction()}".normalizeLength(fileAndFunctionMaxLength)
 
     private fun formatParameters(line: Line): String? =
         line.parameters.takeIf { it.isNotEmpty() }?.entries?.joinToString { "${it.key}=\"${it.value}\"" }
