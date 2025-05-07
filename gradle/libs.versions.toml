@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.1.20"
+kotlin = "1.8.21"
 x_lifecycle = "2.8.7"
 x_appcompat = "1.7.0"
 android_library_plugin = "8.9.2"
