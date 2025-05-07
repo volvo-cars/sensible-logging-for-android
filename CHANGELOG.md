@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- Maintenance release with updated dependencies
+
 ## [1.2.1] - 2023-09-22
 
  - Maintenance release with updated dependencies
