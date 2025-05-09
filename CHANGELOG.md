@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+- *BREAKING*: renamed `Log` to `Logger` to avoid confusion with `android.util.Log` class
+- Removed deprecated methods `Logger.addChannels(...)` and `Logger.removeChannels(...)`. Use `Logger.Setup.addChannels(...)` and `Logger.Setup.removeChannels(...)` instead.
+
 ## [1.2.2] - 2025-05-07 
 
 - Updated `LogcatFormatterExtended` to show clickable filename:linenumber links  
