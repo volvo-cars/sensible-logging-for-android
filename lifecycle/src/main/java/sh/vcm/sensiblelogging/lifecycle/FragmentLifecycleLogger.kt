@@ -23,7 +23,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import sh.vcm.sensiblelogging.Category
-import sh.vcm.sensiblelogging.Log
+import sh.vcm.sensiblelogging.Logger
 
 class FragmentLifecycleLogger(private val category: Category, private val channel: Int, private val separator: String) :
     FragmentManager.FragmentLifecycleCallbacks() {
@@ -100,11 +100,11 @@ class FragmentLifecycleLogger(private val category: Category, private val channe
     private fun log(fragment: Fragment, method: String) {
         // Suppress because it's in fact nullable but uses androidx.annotation.Nullable annotation
         @Suppress("UNNECESSARY_SAFE_CALL")
-        Log.d(
+        Logger.d(
             "${fragment.identifier()} $separator $method",
             mapOf(
                 TYPE_FRAGMENT to fragment.identifier(),
-                TYPE_ACTIVITY to fragment?.activity.identifier().orEmpty(),
+                TYPE_ACTIVITY to fragment?.activity.identifier(),
                 "method" to method
             ),
             category,
@@ -113,5 +113,4 @@ class FragmentLifecycleLogger(private val category: Category, private val channe
     }
 
     private fun Fragment.identifier(): String = this.javaClass.simpleName
-    private fun Activity.identifier(): String = this.javaClass.simpleName
 }

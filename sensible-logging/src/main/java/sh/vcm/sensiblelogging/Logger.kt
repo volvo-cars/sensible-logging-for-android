@@ -30,7 +30,7 @@ import sh.vcm.sensiblelogging.util.Constants.DEFAULT_CHANNEL_LIST
 import sh.vcm.sensiblelogging.util.Constants.DEFAULT_STACK_DEPTH
 import sh.vcm.sensiblelogging.util.Constants.EMPTY_PARAMS
 
-object Log {
+object Logger {
     private val processor: LogProcessor = LogProcessor()
 
     @JvmStatic

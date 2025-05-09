@@ -19,7 +19,7 @@ package sh.vcm.sensiblelogging.lifecycle
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import sh.vcm.sensiblelogging.Category
-import sh.vcm.sensiblelogging.Log
+import sh.vcm.sensiblelogging.Logger
 
 internal open class LifecycleLogger(
     private val identifier: String,
@@ -54,7 +54,7 @@ internal open class LifecycleLogger(
     }
 
     private fun log(method: String) {
-        Log.d(
+        Logger.d(
             "$identifier $separator $method",
             mapOf(
                 type to identifier,
