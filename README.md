@@ -5,16 +5,16 @@ The goal of this library is *not* to be rich in features, but to provide a stabl
 ## Core concepts
 The library consists of a few fundamental elements:
 
-### Log class
-The `Log` class is the main interaction point of this library. 
-Inside it you will find the familiar log statement methods such as `Log.d()`
+### Logger class
+The `Logger` class is the main interaction point of this library. 
+Inside it you will find the familiar log statement methods such as `Logger.d()`
  ```kotlin
- Log.d("Initialising the flux capacitor", Categories.UI, Channels.CrashReporting)
+ Logger.d("Initialising the flux capacitor", Categories.UI, Channels.CrashReporting)
 ```
 
 
 ### Channels
-`Log` directs the log statements to `Channel` implementations. Think of Channels as sinks you print your statements to.
+`Logger` directs the log statements to `Channel` implementations. One log statement can end up in multiple Channels.
 Currently, the library includes `LogCatChannel` and `StandardOutChannel` (for unit tests).
 
 Depending on your use-case, either implement a subtype of `ReleaseChannel` or `DebugChannel`.
@@ -40,7 +40,7 @@ A channel has a integer identifier. You can optionally specify a channel ID in y
 As an example, you can log non-fatal exceptions and messages to your crash reporting service via a `CrashReportingChannel`.
 Using that you can easily log to your crash reporting service from wherever in your code.
 ```kotlin
-    Log.e("Something fatal occurred", exception, 4 /*CrashReportingChannel*/)
+    Logger.e("Something fatal occurred", exception, 4 /*CrashReportingChannel*/)
 ```
 
 While the channel parameter is an integer. We recommend organising your channels in one file, for auto-completeness. Like so:
@@ -53,7 +53,7 @@ object Channels {
 }
 
 // then you can autocomplete your way to the channel
-Log.e("Something fatal occurred", exception, Channels.CrashReporting)
+Logger.e("Something fatal occurred", exception, Channels.CrashReporting)
 ```
 #### Default channels
 During setup, you can mark a Channel as default. Log statements are always forwarded to default channels, meaning you don't have to specify them explicitly in your log statements.
@@ -120,10 +120,10 @@ object Categories {
         Categories.Fragment
     ))
     val filterCombination = Filter.level(Level.WARN) or categoriesFilter
-    val channels = Log.Setup.Configuration()
+    val channels = Logger.Setup.Configuration()
         .addLogCatChannel(filter = filterCombination, default = true)
         .create()
-    Log.Setup.addChannels(channels)
+    Logger.Setup.addChannels(channels)
 
     // optionally opt-in to logging out Process, Activity and Fragment lifecycle methods from the :lifecycle dependency
     registerLifecycleLoggers(
@@ -139,7 +139,7 @@ object Categories {
  // Log from your code
  // Passing "Default" as category is optional, if no category is passed, default will be used 
  // Passing "LogCat" as channel is optional, if no channel is passed, default will be used 
- Log.d("Initialising the flux capacitor", Categories.Default, Channels.LogCat)
+ Logger.d("Initialising the flux capacitor", Categories.Default, Channels.LogCat)
 ```
 
 ### Step 3
