@@ -19,4 +19,4 @@ junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter" }
 
 [plugins]
 android-library = { id = "com.android.library", version.ref = "android_library_plugin" }
-maven-publish = { id = "com.vanniktech.maven.publish", version = "0.25.3" }
+maven-publish = { id = "com.vanniktech.maven.publish", version = "0.31.0" }
