@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [2.0.0] - 2025-05-12 
+
 - *BREAKING*: renamed `Log` to `Logger` to avoid confusion with `android.util.Log` class
 - Removed deprecated methods `Logger.addChannels(...)` and `Logger.removeChannels(...)`. Use `Logger.Setup.addChannels(...)` and `Logger.Setup.removeChannels(...)` instead.
 
