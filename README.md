@@ -106,53 +106,97 @@ object Categories {
 
 ## Usage
 
-### Step 1
+Getting started with Sensible Logging is simple. Here’s how you can set it up in your Android application.
+
+### Step 1: Configure in your Application class
+
+The best place to initialize the logger is in your `Application` class. This ensures that it is configured once when your app starts.
 
 ```kotlin
-    if (BuildConfig.DEBUG) {
-    // Sane defaults filter
-    val categoriesFilter = Filter.categories(listOf(
-        Categories.Default,
-        Categories.Network,
-        Categories.FluxCapacitorFeature,
-        Categories.Process,
-        Categories.Activity,
-        Categories.Fragment
-    ))
-    val filterCombination = Filter.level(Level.WARN) or categoriesFilter
-    val channels = Logger.Setup.Configuration()
-        .addLogCatChannel(filter = filterCombination, default = true)
-        .create()
-    Logger.Setup.addChannels(channels)
+import android.app.Application
+import sh.vcm.sensiblelogging.Level
+import sh.vcm.sensiblelogging.Logger
+import sh.vcm.sensiblelogging.filter.Filter
+import sh.vcm.sensiblelogging.lifecycle.registerLifecycleLoggers
 
-    // optionally opt-in to logging out Process, Activity and Fragment lifecycle methods from the :lifecycle dependency
-    registerLifecycleLoggers(
-        processCategory = Categories.Process,
-        activityCategory = Categories.Activity,
-        fragmentCategory = Categories.Fragment
-    )
+class MyApplication : Application() {
+
+    override fun onCreate() {
+        super.onCreate()
+        setupSensibleLogging()
+    }
+
+    private fun setupSensibleLogging() {
+        if (BuildConfig.DEBUG) {
+            // Create a filter to show only specific categories and levels.
+            // This example shows WARN and above, plus messages from specific categories.
+            val categoriesFilter = Filter.categories(listOf(
+                Categories.Default,
+                Categories.Network,
+                Categories.FluxCapacitorFeature,
+                Categories.Process,
+                Categories.Activity,
+                Categories.Fragment
+            ))
+            val filterCombination = Filter.level(Level.WARN) or categoriesFilter
+
+            // Configure the channels. We'll use the LogCatChannel and make it the default.
+            val channels = Logger.Setup.Configuration()
+                .addLogCatChannel(filter = filterCombination, default = true)
+                .create()
+            Logger.Setup.addChannels(channels)
+
+            // Optionally, enable automatic lifecycle logging for Activities and Fragments.
+            registerLifecycleLoggers(
+                processCategory = Categories.Process,
+                activityCategory = Categories.Activity,
+                fragmentCategory = Categories.Fragment
+            )
+        }
+    }
 }
 ```
 
-### Step 2
+### Step 2: Log messages in your code
+
+Now you can use the `Logger` anywhere in your application.
+
+**Basic logging:**
+
 ```kotlin
- // Log from your code
- // Passing "Default" as category is optional, if no category is passed, default will be used 
- // Passing "LogCat" as channel is optional, if no channel is passed, default will be used 
- Logger.d("Initialising the flux capacitor", Categories.Default, Channels.LogCat)
+// A simple debug message with the default category.
+Logger.d("Initializing the flux capacitor")
+
+// An info message with a specific category.
+Logger.i("User logged in successfully", Categories.Analytics)
 ```
 
-### Step 3
-Build your own Channels, Filters & Formatters to solve your project needs.
+**Logging with different levels:**
 
-For example: you can log non-fatal exceptions to your crash reporting service via a `CrashReportingChannel`.
-The `CrashReportingChannel` can be configured with a `Filter` that only pass a subset of your categories and all logged errors.
-Using that you can easily log to this channel from wherever in your code.
+```kotlin
+// A warning message.
+Logger.w("Network connection is slow", Categories.Network)
 
-Want persisted logs? Implement a `SQLiteChannel` using your favourite ORM library. You can then display those statements from
-your debug UI. Or provide a shortcut from your app settings to dump the database to a text file that your users can email to you.
+// An error message.
+Logger.e("Failed to load user profile", Categories.UI)
+```
 
-Want to control the log categories in runtime? Use the `SharedPreferencesCategoryFilter` with your `LogCatChannel` and enable updating of it from your debug UI.
+**Logging exceptions:**
+
+```kotlin
+try {
+    // Some code that might throw an exception
+} catch (e: Exception) {
+    // Log the exception to the default channel and a crash reporting channel.
+    Logger.e("An unexpected error occurred", e, Channels.CrashReporting)
+}
+```
+
+### Step 3: Customize to your needs
+
+Build your own `Channel`, `Filter`, and `Formatter` implementations to tailor the logging to your project's needs.
+
+For example, you could create a `FileChannel` to write logs to a file, or a `CrashlyticsChannel` to send logs to Firebase Crashlytics. The possibilities are endless!
 
 Download
 --------
