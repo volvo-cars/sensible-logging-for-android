@@ -16,12 +16,10 @@
 package sh.vcm.sensiblelogging
 
 import sh.vcm.sensiblelogging.channel.Channel
-import sh.vcm.sensiblelogging.channel.LogCatChannel
 import sh.vcm.sensiblelogging.channel.StandardOutChannel
 import sh.vcm.sensiblelogging.filter.AllowAllFilter
 import sh.vcm.sensiblelogging.filter.Filter
 import sh.vcm.sensiblelogging.formatter.Formatter
-import sh.vcm.sensiblelogging.formatter.LogCatFormatterExtended
 import sh.vcm.sensiblelogging.formatter.SimpleFormatter
 import sh.vcm.sensiblelogging.processor.LogProcessor
 import sh.vcm.sensiblelogging.util.Constants.DEFAULT_CATEGORY
@@ -234,15 +232,6 @@ object Logger {
 
         class Configuration {
             private val channels = mutableListOf<Channel>()
-
-            fun addLogCatChannel(
-                filter: Filter = AllowAllFilter,
-                formatter: Formatter = LogCatFormatterExtended,
-                default: Boolean = true
-            ): Configuration {
-                channels += LogCatChannel(formatter, filter, default)
-                return this
-            }
 
             fun addStandardOutChannel(
                 filter: Filter = AllowAllFilter,
