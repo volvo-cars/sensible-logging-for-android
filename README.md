@@ -165,16 +165,20 @@ repositories {
 
 // in your app build.gradle
 dependencies {
-  implementation 'sh.vcm.sensiblelogging:sensible-logging:2.0.0'
-  implementation 'sh.vcm.sensiblelogging:lifecycle:2.0.0'
+  implementation 'sh.vcm.sensiblelogging:sensible-logging:2.0.0' // pure JVM core, e.g. Logger, Channel, Filter, Formatter
+  implementation 'sh.vcm.sensiblelogging:android:2.0.0'          // Android integrations, e.g. LogCatChannel, SharedPreferencesCategoryFilter
+  implementation 'sh.vcm.sensiblelogging:lifecycle:2.0.0'        // AndroidX Lifecycle-based logging helpers
 }
 ```
 
 ## Requirements
 
  - `minSdk` is currently set to `16`
- - The base library is only dependant on the Android SDK and kotlin stdlib
- - The lifecycle extensions are dependant on `androidx.appcompat` and `androidx.lifecycle` libraries
+ - The core `sensible-logging` module is plain Kotlin/JVM (no Android SDK dependency), so it can be used
+   from non-Android JVM modules too
+ - The `android` module (Android-specific channels/filters, e.g. `LogCatChannel`) is only dependent on the
+   Android SDK and kotlin stdlib
+ - The lifecycle extensions are dependent on `androidx.appcompat` and `androidx.lifecycle` libraries
 
 ## License
 

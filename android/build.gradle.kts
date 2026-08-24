@@ -7,11 +7,21 @@ plugins {
 
 android {
     compileSdk = libs.versions.compileSdk.get().toInt()
-    namespace = "sh.vcm.sensiblelogging.lifecycle"
+    namespace = "sh.vcm.sensiblelogging.android"
 
     defaultConfig {
-        minSdk = 21
+        minSdk = 16
         consumerProguardFiles("consumer-rules.pro")
+    }
+
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
     }
 
     compileOptions {
@@ -21,16 +31,6 @@ android {
 
     kotlinOptions {
         jvmTarget = "17"
-    }
-
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-            proguardFiles(
-                    getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro"
-            )
-        }
     }
 
     testOptions {
@@ -51,12 +51,8 @@ tasks.withType<Test> {
 }
 
 dependencies {
-    implementation(project(":android"))
+    api(project(":sensible-logging"))
     implementation(libs.kotlin.stdlib)
-    implementation(libs.x.appcompat)
-    implementation(libs.x.lifecycle.process)
-    implementation(libs.x.lifecycle.service)
-    implementation(libs.x.lifecycle.common.java8)
     testImplementation(libs.mockk)
     testImplementation(platform(libs.junit.bom))
     testImplementation(libs.junit.jupiter)
