@@ -5,6 +5,10 @@ plugins {
     id("kotlin-android")
 }
 
+mavenPublishing {
+    coordinates(artifactId = "sensible-logging-lifecycle")
+}
+
 android {
     compileSdk = libs.versions.compileSdk.get().toInt()
     namespace = "sh.vcm.sensiblelogging.lifecycle"

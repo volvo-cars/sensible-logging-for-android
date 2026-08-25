@@ -13,6 +13,7 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Sensible logging for Android"
-include ':sensible-logging'
+
+include ':core'
 include ':android'
 include ':lifecycle'

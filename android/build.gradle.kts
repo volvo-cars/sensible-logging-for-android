@@ -5,6 +5,10 @@ plugins {
     id("kotlin-android")
 }
 
+mavenPublishing {
+    coordinates(artifactId = "sensible-logging-android")
+}
+
 android {
     compileSdk = libs.versions.compileSdk.get().toInt()
     namespace = "sh.vcm.sensiblelogging.android"
@@ -51,7 +55,7 @@ tasks.withType<Test> {
 }
 
 dependencies {
-    api(project(":sensible-logging"))
+    api(project(":core"))
     implementation(libs.kotlin.stdlib)
     testImplementation(libs.mockk)
     testImplementation(platform(libs.junit.bom))

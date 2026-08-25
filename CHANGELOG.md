@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+- *BREAKING*: split the library into three artifacts: `sensible-logging-core` (plain Kotlin/JVM, no Android
+  dependency), `sensible-logging-android` (Android-specific pieces, e.g. `LogCatChannel`,
+  `SharedPreferencesCategoryFilter`), and `sensible-logging-lifecycle` (unchanged, now depends on
+  `sensible-logging-android`). The former `sensible-logging` artifact is replaced by `sensible-logging-core`
+  and `sensible-logging-android`; update your dependencies accordingly.
+
 ## [2.0.0] - 2025-05-12 
 
 - *BREAKING*: renamed `Log` to `Logger` to avoid confusion with `android.util.Log` class

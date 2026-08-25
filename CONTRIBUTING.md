@@ -3,6 +3,36 @@
 We'd love to accept your patches and contributions to this project. There are
 just a few small guidelines you need to follow.
 
+## Module structure
+
+This project publishes three separate Maven artifacts (all under the `sh.vcm.sensiblelogging` group),
+built from three Gradle modules:
+
+| Gradle module | Maven artifact                       | Type  | Depends on           |
+|---------------|---------------------------------------|-------|----------------------|
+| `:core`       | `sensible-logging-core`               | `.jar`| —                     |
+| `:android`    | `sensible-logging-android`            | `.aar`| `sensible-logging-core` (`api`) |
+| `:lifecycle`  | `sensible-logging-lifecycle`          | `.aar`| `sensible-logging-android` |
+
+- **`core`** is a plain Kotlin/JVM module with **no Android SDK dependency at all**, so it can be consumed by
+  non-Android JVM modules as well as Android modules. It contains the core API: `Logger`, `Channel`,
+  `Filter`, `Formatter`, etc. Do not add code here that needs Android platform classes (e.g. `android.util.Log`,
+  `android.content.SharedPreferences`, `android.app.*`) — that belongs in `android` instead.
+- **`android`** is a `com.android.library` module that depends on (and re-exports, via `api`) `core`. It
+  contains the Android-specific pieces built on top of the core library, such as `LogCatChannel` and
+  `SharedPreferencesCategoryFilter`.
+- **`lifecycle`** is a `com.android.library` module that depends on `android` (and transitively on `core`).
+  It contains AndroidX Lifecycle-observer based logging helpers for `Application`/`Activity`/`Fragment`/
+  `Service`.
+
+When adding a feature, put it in the lowest-level module that supports it.
+
+Note that the Gradle module directory/path names (`core`, `android`, `lifecycle`) intentionally differ from
+their published artifact ids (`sensible-logging-core`, `sensible-logging-android`,
+`sensible-logging-lifecycle`); each module sets its artifact id explicitly via
+`mavenPublishing { coordinates(artifactId = "...") }` in its `build.gradle.kts`, since the Vanniktech
+`maven-publish` plugin otherwise defaults the artifact id to the Gradle project name.
+
 ## Code Reviews
 
 All submissions, including submissions by project members, require review. We
