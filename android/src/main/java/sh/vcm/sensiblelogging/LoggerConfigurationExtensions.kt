@@ -24,9 +24,6 @@ import sh.vcm.sensiblelogging.formatter.LogCatFormatterExtended
 
 /**
  * Adds a [LogCatChannel] to this [Logger.Setup.Configuration].
- *
- * Kept as an extension function in the `:android` module (instead of a member of
- * `Configuration` itself) since `LogCatChannel` depends on the Android platform's `android.util.Log`.
  */
 fun Logger.Setup.Configuration.addLogCatChannel(
     filter: Filter = AllowAllFilter,
