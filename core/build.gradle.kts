@@ -7,6 +7,10 @@ kotlin {
     jvmToolchain(17)
 }
 
+mavenPublishing {
+    coordinates(artifactId = "sensible-logging-core")
+}
+
 dependencies {
     implementation(libs.kotlin.stdlib)
     testImplementation(libs.mockk)
