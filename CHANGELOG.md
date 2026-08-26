@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [2.1.1] 2026-08-26
+
+ - No code changes compared to 2.1.0. This release is to fix maven central publishing 
+
 ## [2.1.0] 2026-08-26
 
 - *BREAKING*: split the library into three artifacts: `sensible-logging-core` (plain Kotlin/JVM, no Android
