@@ -165,9 +165,9 @@ repositories {
 
 // in your app build.gradle
 dependencies {
-  implementation 'sh.vcm.sensiblelogging:sensible-logging-core:2.0.0'      // pure JVM core, e.g. Logger, Channel, Filter, Formatter
-  implementation 'sh.vcm.sensiblelogging:sensible-logging-android:2.0.0'   // Android integrations, e.g. LogCatChannel, SharedPreferencesCategoryFilter
-  implementation 'sh.vcm.sensiblelogging:sensible-logging-lifecycle:2.0.0' // AndroidX Lifecycle-based logging helpers
+  implementation 'sh.vcm.sensiblelogging:sensible-logging-core:2.1.0'      // pure JVM core, e.g. Logger, Channel, Filter, Formatter
+  implementation 'sh.vcm.sensiblelogging:sensible-logging-android:2.1.0'   // Android integrations, e.g. LogCatChannel, SharedPreferencesCategoryFilter
+  implementation 'sh.vcm.sensiblelogging:sensible-logging-lifecycle:2.1.0' // AndroidX Lifecycle-based logging helpers
 }
 ```
 

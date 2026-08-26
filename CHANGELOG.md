@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [2.1.0] 2026-08-26
+
 - *BREAKING*: split the library into three artifacts: `sensible-logging-core` (plain Kotlin/JVM, no Android
   dependency), `sensible-logging-android` (Android-specific pieces, e.g. `LogCatChannel`,
   `SharedPreferencesCategoryFilter`), and `sensible-logging-lifecycle` (unchanged, now depends on
