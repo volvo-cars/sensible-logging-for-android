@@ -1,8 +1,6 @@
 plugins {
     id("com.android.library")
-    id("org.jetbrains.kotlin.android")
     id("com.vanniktech.maven.publish")
-    id("kotlin-android")
 }
 
 mavenPublishing {
@@ -33,10 +31,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-
     testOptions {
         unitTests.isReturnDefaultValues = true
     }
@@ -60,4 +54,5 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation(platform(libs.junit.bom))
     testImplementation(libs.junit.jupiter)
+    testRuntimeOnly(libs.junit.platform.launcher)
 }
