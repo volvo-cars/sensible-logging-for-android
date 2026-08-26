@@ -7,9 +7,15 @@
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
+/.idea/AndroidProjectSystem.xml
+/.idea/kotlinc.xml
+/.idea/markdown.xml
+/.idea/migrations.xml
+/.idea/runConfigurations.xml
 .DS_Store
 /build
 /captures
 .externalNativeBuild
 .cxx
 local.properties
+/local-maven-repo

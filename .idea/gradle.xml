@@ -11,8 +11,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/android" />
+            <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/lifecycle" />
-            <option value="$PROJECT_DIR$/sensible-logging" />
           </set>
         </option>
       </GradleProjectSettings>
